@@ -8,6 +8,7 @@ int holdTime = 1000;        // ms hold period: how long to wait for press+hold e
 int longHoldTime = 3000;    // ms long hold period: how long to wait for press+hold event
 
 int checkButton();
+void f_checkButton();
 void clickEvent(void);
 void doubleClickEvent(void);
 void holdEvent(void);
@@ -26,7 +27,14 @@ boolean waitForUp = false;        // when held, whether to wait for the up event
 boolean holdEventPast = false;    // whether or not the hold event happened already
 boolean longHoldEventPast = false;// whether or not the long hold event happened already
 
-
+void f_checkButton() {    
+  int b = checkButton();
+   if (b == 1) clickEvent();
+   if (b == 2) doubleClickEvent();
+   if (b == 3) holdEvent();
+   if (b == 4) longHoldEvent();
+} 
+  
 int checkButton(void) {    
    int event = 0;
    buttonVal = digitalRead(pinButton);
@@ -96,15 +104,19 @@ void clickEvent(void){
   Serial.println("clickEvent");
   Serial.println("LED OFF");
   digitalWrite(pinLedonboard, ON);
+  bBreak = false;
 }
 void doubleClickEvent(void){
   Serial.println("doubleClickEvent");
   Serial.println("LED ON");
   digitalWrite(pinLedonboard, OFF);
+  bBreak  = true;
+//  iIDrede = i;
 }
 void holdEvent(void){
   Serial.println("holdEvent");
 }
 void longHoldEvent(void){
   Serial.println("longHoldEvent");
+
 }

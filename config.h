@@ -87,6 +87,8 @@
   int i_horas     = 0;
   int i_minutos2  = 99;
   int i_horas2    = 99;
+  boolean bBreak  = false;
+  int iIDrede = 0;
 
 #include <EEPROM.h>
 

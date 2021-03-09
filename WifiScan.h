@@ -22,47 +22,31 @@ void f_WifiScan() {
         display.setCursor(0,0);
 //        display.clearDisplay();  // clears the screen and buffer
       }//*/
-
+      sRSSI = String( WiFi.RSSI(i)+100);
+      if (bBreak){
+        Serial.print("Sinal sRSSI:");
+        Serial.print(" ("); Serial.print(sRSSI); Serial.println(")");
+        f_display_WifiScan(i,n);
+        break;
+      }
       sSSID = WiFi.SSID(i);
-      sRSSI = String( WiFi.RSSI(i)+100) ;
+//      sRSSI = String( WiFi.RSSI(i)+100);
       // Print SSID and RSSI for each network found
       Serial.print(i + 1);
       Serial.print("-"); Serial.print(n); Serial.print(": ");
       Serial.print(sSSID);
-      Serial.print(" ("); Serial.print(sRSSI); Serial.print(")");
+      Serial.print(" ("); Serial.print(sRSSI); Serial.println(")");
 //      Serial.println((WiFi.encryptionType(i) == ENC_TYPE_NONE) ? " " : "*");
 
       f_display_WifiScan(i,n);
 //      f_display_WifiScan_v2(i,n);
 
-      JsonWifiScan_Save();
 
+
+      JsonWifiScan_Save();
       display.display();
     }
   }
   Serial.println();
-}
-
-void f_display_WifiScan(int i,int n) {
-    display.clearDisplay();  // clears the screen and buffer
-    display.setTextSize(0); //tamanho font 0 peq / 1 media / 2 grande / 3 gigante
-    display.setTextColor(BLACK, WHITE);
-        display.print(String(i + 1));
-        display.print("-"); display.print(n); display.print(": ");
-        display.print(WiFi.RSSI(i)+100);
-        display.println();
-        display.print(WiFi.SSID(i));
-        display.println();
-    display.display();
-}
-void f_display_WifiScan_v2(int i,int n) {
-    display.setTextSize(0); //tamanho font 0 peq / 1 media / 2 grande / 3 gigante
-    display.setTextColor(BLACK, WHITE);
-        display.print(WiFi.SSID(i));
-        display.println(":");
-        display.print(WiFi.RSSI(i)+100);
-        display.println();
-//        display.print("Forca sinal:"); display.print(WiFi.RSSI(i)+100);
-//        display.println((WiFi.encryptionType(i) == ENC_TYPE_NONE) ? " " : "*");
-//    display.display();
+  Serial.print("bBreak "); Serial.println(bBreak);
 }

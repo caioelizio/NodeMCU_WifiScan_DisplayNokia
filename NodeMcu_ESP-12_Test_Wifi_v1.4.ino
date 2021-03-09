@@ -13,6 +13,7 @@
 //Prototypes
 void iniDisplay();
 void clickEvent(void);
+void f_checkButton();
 void doubleClickEvent(void);
 void holdEvent(void);
 void longHoldEvent(void);
@@ -45,10 +46,11 @@ void loop() {
     f_WifiScan();
     lastTime = millis();
   }
+//  f_checkButton();
 
   int b = checkButton();
    if (b == 1) clickEvent();
    if (b == 2) doubleClickEvent();
    if (b == 3) holdEvent();
-   if (b == 4) longHoldEvent();
+   if (b == 4) longHoldEvent();//*/
 }
